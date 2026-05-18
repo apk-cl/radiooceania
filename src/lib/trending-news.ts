@@ -46,6 +46,7 @@ const TECH_IMAGES = [
 function classifyContent(source: string, category: string, title: string): 'space' | 'tech' | 'local' {
   const TECH_SOURCES = new Set(['FayerWayer', 'Xataka'])
   const SPACE_SOURCES = new Set(['NASA'])
+  const INTL_SOURCES = new Set(['DW Español', 'BBC Mundo', 'La Tercera', 'T13'])
 
   const t = (title + ' ' + category).toLowerCase()
 
@@ -76,9 +77,13 @@ function getFallbackImage(title: string, source: string, category: string): stri
 // ── RSS Feeds ──────────────────────────────────────────────────────────────
 
 const RSS_FEEDS = [
-  // Noticias locales — Gran Concepción
-  { url: 'https://www.biobiochile.cl/feed/', source: 'BioBío Chile', category: 'Regional' },
-  { url: 'https://radiooceania.cl/oficial/index.php/feed/rss/', source: 'Radio Oceanía', category: 'Regional' },
+  // Internacional
+  { url: 'https://rss.dw.com/rdf/rss-es-all', source: 'DW Español', category: 'Internacional' },
+  { url: 'https://feeds.bbci.co.uk/mundo/rss.xml', source: 'BBC Mundo', category: 'Internacional' },
+  // Nacional Chile
+  { url: 'https://www.latercera.com/feed/', source: 'La Tercera', category: 'Nacional' },
+  { url: 'https://www.t13.cl/rss.xml', source: 'T13', category: 'Nacional' },
+  // Regional
   { url: 'https://sabes.cl/feed/', source: 'Sabes.cl', category: 'Regional' },
   { url: 'https://www.diarioconcepcion.cl/feed/', source: 'Diario Concepción', category: 'Regional' },
   // Tecnología

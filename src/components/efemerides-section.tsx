@@ -44,13 +44,47 @@ export function EfemeridesSection() {
             {items.map((item, i) => (
               <div class={`efem-card efem-card--${i === 0 ? 'main' : 'sub'}`}>
                 <span class="efem-year">{item.year}</span>
-                <p class="efem-text">{item.text}</p>
+                <div class="efem-card-content">
+                  <p class="efem-text">{item.text}</p>
+                  <span class="efem-expand-hint">Toca para saber más</span>
+                  <a
+                    class="efem-wiki-link"
+                    href={`https://es.wikipedia.org/w/index.php?search=${encodeURIComponent(item.year + ' ' + item.text)}`}
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>
+                    </svg>
+                    Ver en Wikipedia
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+                    </svg>
+                  </a>
+                </div>
               </div>
             ))}
           </div>
         )}
       </div>
       <style>{efemStyles}</style>
+      <script dangerouslySetInnerHTML={{ __html: `
+(function() {
+  function initEfem() {
+    document.querySelectorAll('.efem-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        if (e.target.closest('a')) return;
+        card.classList.toggle('efem-card--open');
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initEfem);
+  } else {
+    initEfem();
+  }
+})();
+      `}} />
     </section>
   )
 }
@@ -152,6 +186,47 @@ const efemStyles = `
   font-size: 1.1rem;
   align-self: center;
 }
+/* Expand efemérides */
+.efem-card {
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.efem-card-content { display: flex; flex-direction: column; }
+.efem-expand-hint {
+  font-size: 0.68rem;
+  color: rgba(255,255,255,0.22);
+  margin-top: 0.5rem;
+  letter-spacing: 0.3px;
+}
+.efem-card--open .efem-expand-hint { display: none; }
+.efem-wiki-link {
+  display: none;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+  color: #00AAFF;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-decoration: none;
+  background: rgba(0,102,204,0.18);
+  border: 1px solid rgba(0,170,255,0.25);
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  width: fit-content;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.efem-wiki-link:hover {
+  background: rgba(0,102,204,0.35);
+  border-color: rgba(0,170,255,0.5);
+  color: #FFFFFF;
+}
+.efem-card--open .efem-wiki-link { display: inline-flex; }
+.efem-card--open {
+  background: rgba(0,102,204,0.12);
+  border-color: rgba(0,170,255,0.3);
+}
+
 @media (max-width: 768px) {
   .efem-grid { grid-template-columns: 1fr; }
   .efem-card--main { flex-direction: column; gap: 0.5rem; }

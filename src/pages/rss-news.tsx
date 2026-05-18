@@ -99,15 +99,28 @@ export function RssNewsPage({ news, palette }: { news: TrendingNews[]; palette: 
                     <div class={`news-row news-row-${items.length}`}>
                       {items.map(item => (
                         <article class="news-card">
-                          {item.image_url && (
-                            <div class="nc-img">
-                              <img src={item.image_url} alt={item.title} loading="lazy" />
-                            </div>
-                          )}
+                          <div class="nc-img-wrap">
+                            {item.image_url && (
+                              <div class="nc-img">
+                                <img src={item.image_url} alt={item.title} loading="lazy" />
+                              </div>
+                            )}
+                          </div>
                           <div class="nc-body">
                             <span class="nc-cat">{item.category}</span>
                             <h4 class="nc-title">{item.title}</h4>
-                            <p class="nc-excerpt">{item.excerpt}</p>
+                            <div class="nc-excerpt-wrap">
+                              <p class="nc-excerpt">{item.excerpt}</p>
+                            </div>
+                            {item.content && (
+                              <div class="nc-full-wrap" dangerouslySetInnerHTML={{ __html: item.content }} />
+                            )}
+                            <button class="nc-expand-btn" type="button">
+                              <span class="nc-expand-label">Leer más</span>
+                              <svg class="nc-expand-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="6 9 12 15 18 9" />
+                              </svg>
+                            </button>
                             <div class="nc-meta">
                               <span class="nc-source">{source}</span>
                               <span class="nc-date">{formatDate(item.published_at)}</span>
@@ -130,6 +143,51 @@ export function RssNewsPage({ news, palette }: { news: TrendingNews[]; palette: 
         </div>
       </div>
       <style>{styles}</style>
+      <script dangerouslySetInnerHTML={{ __html: `
+(function() {
+  function initExpand() {
+    document.querySelectorAll('.nc-expand-btn').forEach(function(btn) {
+      var card = btn.closest('.news-card');
+      var excerptWrap = card.querySelector('.nc-excerpt-wrap');
+      var fullWrap = card.querySelector('.nc-full-wrap');
+      var imgWrap = card.querySelector('.nc-img-wrap');
+      var label = btn.querySelector('.nc-expand-label');
+      var expanded = false;
+
+      if (!fullWrap || !fullWrap.textContent.trim()) {
+        btn.style.display = 'none';
+        return;
+      }
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        expanded = !expanded;
+        if (expanded) {
+          excerptWrap.style.display = 'none';
+          fullWrap.style.display = 'block';
+          if (imgWrap) imgWrap.style.display = 'none';
+          label.textContent = 'Cerrar';
+          btn.classList.add('nc-expand-btn--open');
+          card.classList.add('news-card--expanded');
+          card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          excerptWrap.style.display = '';
+          fullWrap.style.display = 'none';
+          if (imgWrap) imgWrap.style.display = '';
+          label.textContent = 'Leer más';
+          btn.classList.remove('nc-expand-btn--open');
+          card.classList.remove('news-card--expanded');
+        }
+      });
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initExpand);
+  } else {
+    initExpand();
+  }
+})();
+      `}} />
     </Layout>
   )
 }
@@ -353,8 +411,67 @@ const styles = `
   color: rgba(255,255,255,0.3);
   border-top: 1px solid rgba(255,255,255,0.06);
   padding-top: 0.6rem;
+  margin-top: 0.75rem;
 }
 .nc-source { font-weight: 600; }
+
+/* Botón expandir noticias */
+.nc-full-wrap {
+  display: none;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.68);
+  line-height: 1.7;
+  margin-top: 0.25rem;
+}
+.nc-full-wrap p { margin-bottom: 0.65rem; }
+.nc-full-wrap img {
+  max-width: 100%; height: auto;
+  border-radius: 8px; margin: 0.5rem 0; display: block;
+}
+.nc-full-wrap a { color: #00AAFF; }
+.nc-full-wrap h2, .nc-full-wrap h3, .nc-full-wrap h4 {
+  color: #F5F5F5; margin: 0.75rem 0 0.35rem;
+  font-size: 1rem; font-weight: 700;
+}
+.nc-full-wrap ul, .nc-full-wrap ol {
+  padding-left: 1.25rem; margin-bottom: 0.65rem;
+}
+.nc-full-wrap figure { margin: 0.5rem 0; }
+.nc-full-wrap figcaption {
+  font-size: 0.75rem; opacity: 0.45; text-align: center; margin-top: 0.25rem;
+}
+
+.nc-expand-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: rgba(0,102,204,0.18);
+  border: 1px solid rgba(0,170,255,0.2);
+  color: #00AAFF;
+  border-radius: 20px;
+  padding: 0.28rem 0.8rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 0.6rem 0 0.5rem;
+  font-family: inherit;
+}
+.nc-expand-btn:hover {
+  background: rgba(0,102,204,0.32);
+  border-color: rgba(0,170,255,0.45);
+}
+.nc-expand-arrow {
+  transition: transform 0.25s ease;
+  flex-shrink: 0;
+}
+.nc-expand-btn--open .nc-expand-arrow {
+  transform: rotate(180deg);
+}
+.news-card--expanded {
+  grid-column: 1 / -1;
+}
+.news-card--expanded .nc-img { display: none; }
 
 /* Pie */
 .rss-footer-note {

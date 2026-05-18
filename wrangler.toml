@@ -1,0 +1,45 @@
+name = "oceaniaradio"
+main = "src/index.ts"
+compatibility_date = "2025-05-08"
+compatibility_flags = ["nodejs_compat"]
+account_id = "b156e9dd03d6c0d6f94ab6e27445b2ae"
+workers_dev = true
+
+# Cron triggers - Fetch trending news every hour
+[triggers]
+crons = ["0 * * * *"]
+
+# Custom domain
+routes = [
+  { pattern = "radiooceania.cl/*", zone_id = "6168b4f2c5871558312427e178a2a495" },
+  { pattern = "radiooceania.cl", zone_id = "6168b4f2c5871558312427e178a2a495" },
+  { pattern = "www.radiooceania.cl/*", zone_id = "6168b4f2c5871558312427e178a2a495" },
+  { pattern = "www.radiooceania.cl", zone_id = "6168b4f2c5871558312427e178a2a495" }
+]
+
+# D1 Database
+[[d1_databases]]
+binding = "DB"
+database_name = "oceaniaradio-db"
+database_id = "7abc62ff-c2f6-419d-9f40-7263b1b9f57e"
+preview_database_id = "7abc62ff-c2f6-419d-9f40-7263b1b9f57e"
+
+# KV Namespace
+[[kv_namespaces]]
+binding = "KV"
+id = "6bf9569ea88c4249ab7c6e8fdd1c8b40"
+preview_id = "6bf9569ea88c4249ab7c6e8fdd1c8b40"
+
+# Vars
+[vars]
+SITE_NAME = "Radio Oceanía"
+STREAM_URL = "http://sonando-us.digitalproserver.com:8000/oceania-fm.aac"
+STREAM_URL_HLS = "http://sonando-us.digitalproserver.com:8000/oceania-fm.aac"
+DEFAULT_PRIMARY_COLOR = "#FFFFFF"
+DEFAULT_SECONDARY_COLOR = "#0066CC"
+DEFAULT_BG_COLOR = "#F5F7FA"
+DEFAULT_TEXT_COLOR = "#1A1A1A"
+DEFAULT_ACCENT_COLOR = "#FFB800"
+WEATHER_API_KEY = ""
+CONTACT_EMAIL = "oceaniatalcahuano@gmail.com"
+WHATSAPP_NUMBER = "56985302627"

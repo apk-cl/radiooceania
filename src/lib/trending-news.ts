@@ -78,17 +78,17 @@ function getFallbackImage(title: string, source: string, category: string): stri
 
 const RSS_FEEDS = [
   // Internacional
-  { url: 'https://rss.dw.com/rdf/rss-es-all', source: 'DW Español', category: 'Internacional' },
-  { url: 'https://feeds.bbci.co.uk/mundo/rss.xml', source: 'BBC Mundo', category: 'Internacional' },
+  { url: 'https://feeds.bbci.co.uk/mundo/rss.xml',                     source: 'BBC Mundo',         category: 'Internacional'  },
+  { url: 'https://feeds.elpais.com/mrss-s/pages/ep/site/elpais.com/portada', source: 'El País',      category: 'Internacional'  },
   // Nacional Chile
-  { url: 'https://www.latercera.com/feed/', source: 'La Tercera', category: 'Nacional' },
-  { url: 'https://www.t13.cl/rss.xml', source: 'T13', category: 'Nacional' },
-  // Regional
-  { url: 'https://sabes.cl/feed/', source: 'Sabes.cl', category: 'Regional' },
-  { url: 'https://www.diarioconcepcion.cl/feed/', source: 'Diario Concepción', category: 'Regional' },
+  { url: 'https://www.latercera.com/rss/',                             source: 'La Tercera',         category: 'Nacional Chile' },
+  { url: 'https://www.elciudadano.com/feed/',                          source: 'El Ciudadano',       category: 'Nacional Chile' },
+  // Regional Concepción
+  { url: 'https://www.elsur.cl/?feed=rss2',                            source: 'El Sur',             category: 'Regional'       },
+  { url: 'https://www.diarioconcepcion.cl/rss.xml',                    source: 'Diario Concepción',  category: 'Regional'       },
   // Tecnología
-  { url: 'https://www.fayerwayer.com/feed/', source: 'FayerWayer', category: 'Tecnología' },
-  { url: 'https://feeds.weblogssl.com/xataka', source: 'Xataka', category: 'Tecnología' },
+  { url: 'https://www.fayerwayer.com/feed/',                           source: 'FayerWayer',         category: 'Tecnología'     },
+  { url: 'https://www.xataka.com/index.xml',                           source: 'Xataka',             category: 'Tecnología'     },
 ]
 
 // ── Funciones públicas ─────────────────────────────────────────────────────

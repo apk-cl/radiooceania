@@ -3,11 +3,11 @@ import type { TrendingNews } from '../lib/trending-news'
 import type { ColorPalette } from '../lib/colors'
 
 const SOURCE_ORDER = [
-  { name: 'DW Español',        type: 'Internacional'  },
   { name: 'BBC Mundo',         type: 'Internacional'  },
+  { name: 'El País',           type: 'Internacional'  },
   { name: 'La Tercera',        type: 'Nacional Chile' },
-  { name: 'T13',               type: 'Nacional Chile' },
-  { name: 'Sabes.cl',          type: 'Regional'       },
+  { name: 'El Ciudadano',      type: 'Nacional Chile' },
+  { name: 'El Sur',            type: 'Regional'       },
   { name: 'Diario Concepción', type: 'Regional'       },
   { name: 'FayerWayer',        type: 'Tecnología'     },
   { name: 'Xataka',            type: 'Tecnología'     },

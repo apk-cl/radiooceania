@@ -111,6 +111,7 @@ export function Layout({ palette, userEmail, children }: {
           },
           "sameAs": [
             "https://www.facebook.com/radiooceania937",
+            "https://www.instagram.com/radiooceania.cl/",
             "https://radiooceania.cl"
           ]
         }) }} />
@@ -167,14 +168,14 @@ function Header({ userEmail, palette: _p }: { userEmail?: string; palette: Color
           </ul>
         </nav>
         <div class="social-header">
-          <a href="https://www.instagram.com/radio_oceania_talcahuano/" target="_blank" rel="noopener" aria-label="Instagram">
+          <a href="https://www.instagram.com/radiooceania.cl/" target="_blank" rel="noopener" aria-label="Instagram">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z" />
               <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
             </svg>
           </a>
-          <a href="https://radiooceania.cl/oficial/index.php/feed/rss/" target="_blank" rel="noopener" aria-label="RSS">
+          <a href="/rss" rel="noopener" aria-label="Noticias">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
               <path d="M4 11a9 9 0 019 9M4 4a16 16 0 0116 16M4 18a3 3 0 013 3" />
             </svg>
@@ -211,8 +212,8 @@ function Footer({ palette: _p }: { palette: ColorPalette }) {
         <div class="footer-col footer-social">
           <h4>Síguenos</h4>
           <div class="social-links">
-            <a href="https://www.instagram.com/radio_oceania_talcahuano/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
-            <a href="https://radiooceania.cl/oficial/index.php/feed/rss/" target="_blank" rel="noopener" aria-label="RSS">RSS</a>
+            <a href="https://www.instagram.com/radiooceania.cl/" target="_blank" rel="noopener" aria-label="Instagram">Instagram</a>
+            <a href="/rss" rel="noopener" aria-label="Noticias">Noticias</a>
           </div>
         </div>
       </div>

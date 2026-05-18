@@ -2,11 +2,12 @@ import { Hono } from 'hono'
 import type { Env, NewsItem, ProgrammingItem, ContactMessage, PageData } from './types'
 import { getPalette, setPalette, DEFAULT_PALETTE } from './lib/colors'
 import { getWeather } from './lib/weather'
-import { getTrendingNews, fetchAndStoreTrendingNews } from './lib/trending-news'
+import { getTrendingNews, getAllTrendingNews, fetchAndStoreTrendingNews } from './lib/trending-news'
 import { getSantoralForDate } from './lib/santoral-fetch'
 import { HomePage } from './pages/home'
 import { ProgrammingPage } from './pages/programming'
 import { ContactPage } from './pages/contact'
+import { RssNewsPage } from './pages/rss-news'
 import { AdminDashboard } from './admin/dashboard'
 import { AdminColors } from './admin/colors'
 import { AdminNews, AdminNewsForm } from './admin/news-editor'
@@ -242,6 +243,12 @@ app.get('/sitemap.xml', (c) => {
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>${base}/rss</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>hourly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>${base}/programacion</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
@@ -266,6 +273,14 @@ app.get('/robots.txt', (c) => {
     200,
     { 'Content-Type': 'text/plain', 'Cache-Control': 'public, max-age=86400' }
   )
+})
+
+app.get('/rss', async (c) => {
+  const [palette, news] = await Promise.all([
+    getPalette(c.env.KV),
+    getAllTrendingNews(c.env.DB),
+  ])
+  return c.html(RssNewsPage({ news, palette }), 200, NO_CACHE)
 })
 
 app.get('/', async (c) => {

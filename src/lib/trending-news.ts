@@ -104,6 +104,17 @@ export async function getTrendingNews(db: D1Database): Promise<TrendingNews[]> {
   }
 }
 
+export async function getAllTrendingNews(db: D1Database): Promise<TrendingNews[]> {
+  try {
+    const result: any = await db.prepare(
+      'SELECT * FROM trending_news ORDER BY source, published_at DESC'
+    ).all()
+    return (result.results || []) as TrendingNews[]
+  } catch {
+    return []
+  }
+}
+
 export async function fetchAndStoreTrendingNews(db: D1Database, kv: KVNamespace): Promise<void> {
   try {
     const cached = await kv.get(CACHE_KEY)
@@ -179,7 +190,7 @@ async function fetchFromRSS(): Promise<TrendingNews[]> {
     }
   }
 
-  return unique.slice(0, 10)
+  return unique.slice(0, 16)
 }
 
 function parseRSSItems(xml: string, source: string, defaultCategory: string): TrendingNews[] {
@@ -187,7 +198,7 @@ function parseRSSItems(xml: string, source: string, defaultCategory: string): Tr
   const itemRegex = /<item>([\s\S]*?)<\/item>/gi
   let match
 
-  while ((match = itemRegex.exec(xml)) !== null && items.length < 3) {
+  while ((match = itemRegex.exec(xml)) !== null && items.length < 2) {
     const raw = match[1]
     const title = extractTag(raw, 'title')
     if (!title) continue

@@ -81,17 +81,17 @@ const efemStyles = `
   display: flex;
   align-items: center;
   gap: 0.65rem;
-  color: #FFB800;
+  color: #00AAFF;
 }
 .efem-title {
   margin-bottom: 0;
-  color: #FFB800;
+  color: #00AAFF;
 }
-.efem-title::after { background: #FFB800; }
+.efem-title::after { background: #0066CC; }
 .efem-date-badge {
-  background: rgba(255,184,0,0.12);
-  border: 1px solid rgba(255,184,0,0.3);
-  color: #FFB800;
+  background: rgba(0,102,204,0.15);
+  border: 1px solid rgba(0,170,255,0.3);
+  color: #00AAFF;
   padding: 0.3rem 0.9rem;
   border-radius: 20px;
   font-size: 0.78rem;
@@ -119,14 +119,14 @@ const efemStyles = `
   transition: background 0.2s, transform 0.2s;
 }
 .efem-card:hover {
-  background: rgba(255,184,0,0.06);
-  border-color: rgba(255,184,0,0.2);
+  background: rgba(0,102,204,0.1);
+  border-color: rgba(0,170,255,0.25);
   transform: translateY(-2px);
 }
 .efem-card--main {
   grid-column: 1 / -1;
-  background: rgba(255,184,0,0.07);
-  border-color: rgba(255,184,0,0.25);
+  background: rgba(0,102,204,0.08);
+  border-color: rgba(0,170,255,0.2);
   flex-direction: row;
   align-items: flex-start;
   gap: 1.5rem;
@@ -134,7 +134,7 @@ const efemStyles = `
 .efem-year {
   font-size: 1.65rem;
   font-weight: 800;
-  color: #FFB800;
+  color: #00AAFF;
   letter-spacing: -1px;
   line-height: 1;
   flex-shrink: 0;

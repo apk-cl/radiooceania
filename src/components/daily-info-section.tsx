@@ -124,8 +124,8 @@ const dailyStyles = `
   position: absolute; top: 0; left: 0; right: 0; height: 3px;
   border-radius: 16px 16px 0 0;
 }
-.daily-card--date::before { background: linear-gradient(90deg, #FFB800, #FF8C00); }
-.daily-card--clocks::before { background: linear-gradient(90deg, #0066CC, #00AAFF); }
+.daily-card--date::before { background: linear-gradient(90deg, #0066CC, #00AAFF); }
+.daily-card--clocks::before { background: linear-gradient(90deg, #00AAFF, #0066CC); }
 
 .daily-card-icon {
   color: rgba(255,255,255,0.35);
@@ -143,7 +143,7 @@ const dailyStyles = `
   font-size: 1.4rem;
   font-weight: 700;
   line-height: 1.3;
-  color: #FFB800;
+  color: #F5F5F5;
   text-transform: capitalize;
 }
 .daily-saints {
@@ -187,7 +187,7 @@ const dailyStyles = `
   font-size: 1.55rem;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: #00AAFF;
+  color: #F5F5F5;
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum";
 }

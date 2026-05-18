@@ -14,10 +14,10 @@ const SOURCE_ORDER = [
 ]
 
 const CAT_COLOR: Record<string, string> = {
-  'Internacional':  '#0066CC',
-  'Nacional Chile': '#C0392B',
-  'Regional':       '#27AE60',
-  'Tecnología':     '#8E44AD',
+  'Internacional':  '#00AAFF',
+  'Nacional Chile': '#0066CC',
+  'Regional':       '#004F99',
+  'Tecnología':     '#0088DD',
 }
 
 const CATEGORIES = ['Internacional', 'Nacional Chile', 'Regional', 'Tecnología']
@@ -154,6 +154,7 @@ const styles = `
   padding: 3rem 0 4rem;
   min-height: 60vh;
   color: #F5F5F5;
+  background: linear-gradient(180deg, #08305e 0%, #051e3e 40%, #040D14 100%);
 }
 
 /* Hero */
@@ -209,8 +210,8 @@ const styles = `
   margin-bottom: 0.75rem;
 }
 .sources-table-box {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,102,204,0.08);
+  border: 1px solid rgba(0,170,255,0.15);
   border-radius: 12px;
   overflow: hidden;
 }
@@ -219,8 +220,8 @@ const styles = `
   border-collapse: collapse;
 }
 .sources-table th {
-  background: rgba(0,102,204,0.25);
-  color: rgba(255,255,255,0.7);
+  background: rgba(0,102,204,0.3);
+  color: rgba(255,255,255,0.85);
   padding: 0.65rem 1.25rem;
   text-align: left;
   font-size: 0.75rem;
@@ -285,16 +286,17 @@ const styles = `
 
 /* Card */
 .news-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,102,204,0.1);
+  border: 1px solid rgba(0,170,255,0.12);
   border-radius: 12px;
   overflow: hidden;
   transition: all 0.25s ease;
 }
 .news-card:hover {
-  background: rgba(255,255,255,0.09);
+  background: rgba(0,102,204,0.2);
   transform: translateY(-3px);
-  box-shadow: 0 10px 28px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 32px rgba(0,0,0,0.4);
+  border-color: rgba(0,170,255,0.3);
 }
 .nc-img {
   height: 180px;

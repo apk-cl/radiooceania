@@ -320,12 +320,9 @@ body {
   background: linear-gradient(
     to bottom,
     #FFFFFF 0%,
-    #EBF5FB 6%,
-    #AED6F1 18%,
-    #5DADE2 34%,
-    #2980B9 48%,
-    #1A5276 62%,
-    #0D2137 78%,
+    #D0EDFF 8%,
+    #00AAFF 30%,
+    #0055B3 58%,
     #040D14 100%
   );
   background-attachment: local;

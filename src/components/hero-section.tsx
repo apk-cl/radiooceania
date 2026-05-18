@@ -156,7 +156,7 @@ const heroStyles = `
 .hero-slogan {
   font-size: 1.3rem;
   font-weight: 600;
-  color: #FFB800;
+  color: #00AAFF;
   margin-bottom: 1rem;
   letter-spacing: 0.3px;
 }

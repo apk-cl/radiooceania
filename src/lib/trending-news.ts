@@ -207,7 +207,7 @@ function parseRSSItems(xml: string, source: string, defaultCategory: string): Tr
     const encoded = extractTag(raw, 'content:encoded') || extractTag(raw, 'encoded')
     const pubDate = extractTag(raw, 'pubDate')
     const rawCategory = extractTag(raw, 'category') || defaultCategory
-    const bodyText = encoded || description || ''
+    const bodyText = stripMediaElements(encoded || description || '')
 
     // Imagen: desde el feed primero, si no hay → referencial
     let imageUrl = extractImage(raw, description, encoded)
@@ -274,6 +274,18 @@ function extractTag(xml: string, tag: string): string {
   if (cdata) return cdata[1].trim()
   const plain = xml.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`, 'i'))
   return plain ? plain[1].trim() : ''
+}
+
+function stripMediaElements(html: string): string {
+  return html
+    .replace(/<video[\s\S]*?<\/video>/gi, '')
+    .replace(/<audio[\s\S]*?<\/audio>/gi, '')
+    .replace(/<iframe[\s\S]*?<\/iframe>/gi, '')
+    .replace(/<embed[^>]*\/?>/gi, '')
+    .replace(/<object[\s\S]*?<\/object>/gi, '')
+    .replace(/<script[\s\S]*?<\/script>/gi, '')
+    .replace(/<noscript[\s\S]*?<\/noscript>/gi, '')
+    .replace(/<figure[^>]*class="[^"]*(?:wp-block-embed|video-embed|youtube|vimeo|jetpack-video)[^"]*"[\s\S]*?<\/figure>/gi, '')
 }
 
 function stripHTML(html: string): string {
